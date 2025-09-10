@@ -17,6 +17,7 @@ export function AuthProvider({ children }) {
                 withCredentials: true
             });
             if (response.status === 200) {
+                console.log("AuthContext user:", response.data); // Debug log
                 setUser(response.data);
             }
         } catch (error) {

@@ -17,7 +17,7 @@ const Navbar = () => {
             <Link to="/" className="text-gray-700 hover:text-blue-600">Home</Link>
             <Link to="/shop" className="text-gray-700 hover:text-blue-600">Inventory</Link>
             <Link to="/sell" className="text-gray-700 hover:text-blue-600">Sell/Donate</Link>
-            <Link to="/my-listings" className="text-gray-700 hover:text-blue-600"> My Listings</Link>
+            <Link to="/my-listings" className="text-gray-700 hover:text-blue-600">My Listings</Link>
           </div>
 
           <div className="flex items-center space-x-4">
@@ -28,14 +28,26 @@ const Navbar = () => {
             </Link>
             {user ? (
               <div className="flex items-center space-x-4">
-                <img
-                  src={user.profile_picture}
-                  alt={user.username}
-                  className="h-8 w-8 rounded-full"
-                />
+                {user?.profile_picture ? (
+  <img
+    src={user.profile_picture}
+    alt={user.username || "Profile"}
+    className="h-12 w-12 rounded-full object-cover border-4 border-blue-600"
+    onError={(e) => {
+      e.target.src = "https://via.placeholder.com/64?text=User";
+    }}
+  />
+) : (
+  <img
+    src="https://via.placeholder.com/64?text=User"
+    alt="Default Profile"
+    className="h-16 w-16 rounded-full object-cover border-2 border-gray-400"
+  />
+)}
+
                 <button
                   onClick={logout}
-                  className="text-gray-700 hover:text-blue-600"
+                  className="bg-white text-gray-700 hover:text-blue-600"
                 >
                   Logout
                 </button>
@@ -44,9 +56,7 @@ const Navbar = () => {
               <Link to="/login" className="text-gray-700 hover:text-blue-600">
                 Login
               </Link>
-              
             )}
-             
           </div>
         </div>
       </div>
